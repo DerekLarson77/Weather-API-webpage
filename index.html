@@ -45,20 +45,47 @@
     </div>
   </nav>
 
-  <!-- Explanation -->
-  <h1><br>Welcome Page</h1>
 
-    <ul>
-        <li> <a href="maxtemp.html">Maximum Temperature</a></li>
-        <li> <a href="humidity.html">Humidity</a></li>
-        <li> <a href="cloudiness.html">Cloudiness</a></li>
-        <li> <a href="windspeed.html">Wind Speed</a></li>
-    </ul>
+<div class="sidenav">
+  <a href="maxtemp.html">
+    <img src="visualizations/Fig1.png" class="thumbnail">
+  </a>
+  <a href="humidity.html">
+    <img src="visualizations/Fig2.png" class="thumbnail">
+  </a>
+  <a href="cloudiness.html">
+    <img src="visualizations/Fig3.png" class="thumbnail">
+  </a>
+  <a href="windspeed.html">
+    <img src="visualizations/Fig4.png" class="thumbnail">
+  </a> 
 
-    <p><br>Other navigation options:</p>
+</div>
 
-    <a href="comparison.html">View a comparison of all graphs<br></a>
-    <a href="data_used.html">See the code</a>
+<br><br>
+<p>Random lists of both latitude and longitude are generated within a range of -90 to 90 latitude, and -180 to 180 longitude.<br><br>
+	
+The latitude and longitude are used in the citipy api to generate a list of unique cities.  This city list is then used with the open weather api to<br>
+  get weather data for each of these cities.  Any city not found in api is noted and then ignored.<br><br>
+
+A function is built to ask the user what unit of measure they would wish to view the temperature.  This also helps determine the metric for wind speed<br>
+  even though that is not explicitly asked.<br><br>
+
+A for loop goes through each city in the list of cities to create the specific url.  Each city with the index and the total count of cities is printed to<br>
+  see what city the code is working on.  All the desired data is appended to a dictionary.  If the API reads a 404 code, that city is appended to a<br>
+  cities_notlisted list, and the for loop will continue to next element.  After each city the program pauses for 1 second to stay within the<br>
+  constraint of 60 calls per minute.  This pause results in this loop taking roughly 10 minutes to complete (600/60 = 10).<br><br>
+
+When the loop is complete.  A new DataFrame is created by the appended dictionary.  The dataframe is output to the cities.csv file within the output_data folder.<br>
+  Then the list of cities not listed is printed at the end.<br><br>
+
+In order to avoid having to pull the data each time the notebook is opened; a read_csv is used on the cities.csv file that was created just before.<br><br>
+
+Maximum temperature, Humidity, Cloudiness and Wind speed all individually made into a scatter plot versus latitude.  A function is created to receive the<br>
+  desired x and y axis and then print the scatter plot using matplotlib.<br><br>
+
+The same scatter plots are done again, but broken up by North and South hemispheres, and with a linear regression line put in the plot.  Two other functions<br>
+  were created just as before.  One for the north and one for the south.</p>
 
     <br><br><br>
 
